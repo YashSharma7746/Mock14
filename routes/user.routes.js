@@ -4,6 +4,9 @@ const bcrypt = require("bcrypt");
 const userRouter = express.Router();
 const { userModel } = require("../model/user.model");
 
+userRouter.get("/", (req, res) => {
+  res.send("HOME PAGE");
+});
 userRouter.post("/register", async (req, res) => {
   const { username, email, password, avatar } = req.body;
   try {
