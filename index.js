@@ -11,7 +11,7 @@ app.use(cors());
 
 app.use("/", userRouter);
 app.use(auth);
-app.use("/", blogRouter);
+app.use("/blog", blogRouter);
 
 app.listen(4040, async () => {
   try {

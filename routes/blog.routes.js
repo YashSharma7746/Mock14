@@ -2,7 +2,7 @@ const express = require("express");
 const blogRouter = express.Router();
 const { blogModel } = require("../model/blog.model");
 
-blogRouter.get("/blogs", async (req, res) => {
+blogRouter.get("/blog/blogs", async (req, res) => {
   let { page, limit, title, category, sort, order } = req.query;
   limit = limit ? limit : 5;
   order = order === "asc" ? 1 : -1;
@@ -42,7 +42,7 @@ blogRouter.get("/blogs", async (req, res) => {
   }
 });
 
-blogRouter.post("/blogs", async (req, res) => {
+blogRouter.post("/blog/blogs", async (req, res) => {
   try {
     let newBlog = new blogModel(req.body);
     newBlog.save();
@@ -52,7 +52,7 @@ blogRouter.post("/blogs", async (req, res) => {
   }
 });
 
-blogRouter.put("/blogs/:id", async (req, res) => {
+blogRouter.put("/blog/blogs/:id", async (req, res) => {
   const id = req.params.id;
   try {
     await blogModel.findByIdAndUpdate(id, req.body);
@@ -62,7 +62,7 @@ blogRouter.put("/blogs/:id", async (req, res) => {
   }
 });
 
-blogRouter.patch("/blogs/:id", async (req, res) => {
+blogRouter.patch("/blog/blogs/:id", async (req, res) => {
   const id = req.params.id;
   try {
     await blogModel.findByIdAndUpdate(id, req.body);
@@ -72,7 +72,7 @@ blogRouter.patch("/blogs/:id", async (req, res) => {
   }
 });
 
-blogRouter.delete("/blogs/:id", async (req, res) => {
+blogRouter.delete("/blog/blogs/:id", async (req, res) => {
   const id = req.params.id;
   try {
     await blogModel.findByIdAndDelete(id);
@@ -82,7 +82,7 @@ blogRouter.delete("/blogs/:id", async (req, res) => {
   }
 });
 
-blogRouter.put("/blogs/:id/like", async (req, res) => {
+blogRouter.put("/blog/blogs/:id/like", async (req, res) => {
   const id = req.params.id;
   try {
     await blogModel.findByIdAndUpdate(id, req.body);
@@ -92,7 +92,27 @@ blogRouter.put("/blogs/:id/like", async (req, res) => {
   }
 });
 
-blogRouter.put("/blogs/:id/comment", async (req, res) => {
+blogRouter.patch("/blog/blogs/:id/like", async (req, res) => {
+  const id = req.params.id;
+  try {
+    await blogModel.findByIdAndUpdate(id, req.body);
+    res.status(201).send({ msg: "Updated Successfully" });
+  } catch (e) {
+    res.status(400).send({ msg: "Something Went Wrong" });
+  }
+});
+
+blogRouter.put("/blog/blogs/:id/comment", async (req, res) => {
+  const id = req.params.id;
+  try {
+    await blogModel.findByIdAndUpdate(id, req.body);
+    res.status(201).send({ msg: "Updated Successfully" });
+  } catch (e) {
+    res.status(400).send({ msg: "Something Went Wrong" });
+  }
+});
+
+blogRouter.patch("/blog/blogs/:id/comment", async (req, res) => {
   const id = req.params.id;
   try {
     await blogModel.findByIdAndUpdate(id, req.body);
