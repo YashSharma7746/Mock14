@@ -1,7 +1,8 @@
 const express = require("express");
 const blogRouter = express.Router();
 const { blogModel } = require("../model/blog.model");
-
+const { auth } = require("../middleware/auth");
+blogRouter.use(auth);
 blogRouter.get("/blog/blogs", async (req, res) => {
   let { page, limit, title, category, sort, order } = req.query;
   limit = limit ? limit : 5;

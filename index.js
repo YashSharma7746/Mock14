@@ -3,14 +3,12 @@ const app = express();
 const { connection } = require("./db");
 const cors = require("cors");
 const { userRouter } = require("./routes/user.routes");
-const { auth } = require("./middleware/auth");
 const { blogRouter } = require("./routes/blog.routes");
 
 app.use(express.json());
 app.use(cors());
 
 app.use("/", userRouter);
-app.use(auth);
 app.use("/blog", blogRouter);
 
 app.listen(4040, async () => {
